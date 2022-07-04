@@ -1,0 +1,465 @@
+.plaça{
+    display: flex;
+    border-bottom: solid 1px;
+}
+.especialitats{
+    background-color: rgba(0, 0, 0, 0.089);
+    border: none;
+
+}
+
+.nivellOcicle{
+    background-color: rgba(0, 0, 0, 0.089);
+    border: none;
+
+}
+html, body {
+    height: 100%;
+	background: #6DD5FA fixed;                                          /* Para navegadores viejos */
+	background: linear-gradient(to top right, #FF8235, #6DD5FA) fixed;  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+html, body {
+    font-family: Arial;
+	font-size: 20px;
+}
+
+.modo-pc {
+    background: #6DD5FA fixed;                                          /* Para navegadores viejos */
+	background: linear-gradient(to top right, #FFFF35, #DD5FAF) fixed;  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+input[type=radio], input[type=checkbox] {
+    ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+}
+
+
+@media screen and ( max-height: 800px) {
+	.doc-PDF {
+		height: 550px;
+	}
+}
+
+@media screen and ( max-height: 1000px) {
+	.doc-PDF {
+		height: 850px;
+	}
+}
+
+@-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.0;}
+}
+.blink{
+	text-decoration: blink;
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:ease-in-out;
+	-webkit-animation-direction: alternate;
+}
+
+#cargando {
+    z-index: 100;
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+
+.link-index {
+    text-decoration: none!Important;
+    color: white;
+}
+
+.link-index:hover {
+    color: white;
+}
+
+.imagen-logo {
+    .height: 1.5em;
+}
+
+.relleno-cabecera {
+    height: 5em;
+}
+
+.relleno-pie {
+    height: 4em;
+}
+
+.cabecera, .pie {
+	position: fixed;
+	background: black;
+	color: white;
+	font-size: 1.2em;
+	padding: 0.5em;
+	width: 100%;
+	z-index: 10;
+}
+
+.cabecera {
+	top: 0;
+}
+.pie {
+	bottom: 0;
+    text-align: center;
+}
+
+.iconos{
+	height:32px;
+	width:32px;
+}
+
+.imagen_centrada_vertical{
+	vertical-align:middle;
+}
+
+.quitar-padding {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.clearfix {
+    padding-bottom: 0.5em;
+}
+.sangrado-inferior {
+    padding-bottom: 0.25em;
+}
+
+.ancho-total {
+	width: 100%!Important;
+}
+
+.centrado {
+    text-align: center;
+}
+
+.izquierda {
+    text-align: left!Important;
+}
+
+.derecha {
+    text-align: right!Important;
+}
+
+.negrita {
+    font-weight: bold!important;
+}
+
+.titulo-pagina {
+    font-size: 2.2em;
+    font-weight: bold;
+    .margin-top: 1em;
+    text-align: center;
+}
+
+.titulo {
+    font-size: 1.3em;
+    font-weight: bold;
+    .margin-top: 1em;
+    text-align: center;
+}
+
+.alerta {
+    font-family: "Verdana";
+    text-align: center;
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: rgb(3, 3, 3) 1px 1px 1px;
+}
+.mensaje {
+    font-family: "Verdana";
+    text-align: center;
+    color: green;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: rgb(3, 3, 3) 1px 1px 1px;
+}
+
+.info {
+    font-family: "Verdana";
+    text-align: center;
+    color: gray;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: rgb(3, 3, 3) 1px 1px 1px;
+}
+
+.aviso {
+	font-size: 1.5em;
+    color: yellow;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px rgba(100, 100, 100, 0.75);
+}
+
+.avisoOK {
+	font-size: 1.5em;
+    color: Green;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px rgba(100, 100, 100, 0.75);
+}
+
+.elemento-lista {
+    padding: 5px 15px!Important;
+}
+.sin-linea:link, .elemento-lista:link {
+    text-decoration: none;
+}
+
+.sin-linea:hover {
+    .color: yellow;
+}
+
+.elemento-lista:hover {
+	background-color: silver!Important;
+}
+
+.btn-normal, 
+.btn-buscar,
+.btn-cancelar {
+    .margin: 0.50em 0.50em 0.50em 0em;
+    margin: 0.25em;
+    padding: 0.25em 0.50em;
+    border-top-left-radius: 15px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 15px;
+	text-shadow: 2px 3px 3px #030303;
+	font-family: Arial;
+	color: #ffffff;
+    font-size: 20px;
+	font-weight: bold;
+    text-align: center!Important;
+    .transition: border 1s;
+	.transition: box-shadow 1s;
+	.transition: text-shadow 2s;
+	.transition:color 2s;
+	text-decoration: none;
+}
+
+.btn-buscar {
+	background: #C98F90;                                            /* Para navegadores viejos */
+	background-image: linear-gradient(to top, #6F659C, #C98F90);    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: solid #6F659C 4px;
+}
+
+.btn-normal {
+	background: #1b1d1f;                                            /* Para navegadores viejos */
+	background-image: linear-gradient(to bottom, #1b1d1f, #73afd4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	border: solid #535459 4px;
+	
+}
+
+.btn-cancelar {
+	background: #A80303;                                            /* Para navegadores viejos */
+	background-image: linear-gradient(to bottom, #A80303, #331616); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	border: solid #331616 4px;
+}
+
+
+.btn-buscar:hover {
+	border:4px solid #C98F90;
+	box-shadow: 0px 0px 15px 5px #6F659C;
+	text-shadow: 2px 3px 3px #0B4C5F;
+	color: #ffe100;
+    background: #C98F90;                                            /* Para navegadores viejos */
+	background-image: linear-gradient(to bottom, #6F659C, #C98F90); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.btn-normal:hover {
+	border:4px solid dodgerblue;
+	box-shadow: 0px 0px 15px 5px #2ECCFA;
+	text-shadow: 2px 3px 3px #0B4C5F;
+	color: #ffe100;
+    background: #213c4d;                                            /* Para navegadores viejos */
+	background-image: linear-gradient(to bottom, #213c4d, #0096fa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.btn-cancelar:hover {
+	border:4px solid #A80303;
+	box-shadow: 0px 0px 15px 5px #F77E7E;
+	text-shadow: 2px 3px 3px #0B4C5F;
+    color: #ffe100;
+	background: #213c4d;                                            /* Para navegadores viejos */
+	background-image: linear-gradient(to bottom, #331616, #A80303); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.btn-normal[disabled="disabled"], 
+.btn-buscar[disabled="disabled"],
+.btn-cancelar[disabled="disabled"] {
+	color: gray;
+	border:4px solid gray;
+	background: #304352;                                    /* Para navegadores viejos */
+	background: linear-gradient(to top, #d7d2cc, #304352);  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	pointer-events: none;
+}
+
+.en-linea {
+	display: inline-block;
+	margin: 0.5em;
+}
+
+.caja-en-linea {
+	display: inline-block;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.anotacion {
+    font-size: 12px;
+    color: blue;
+}
+
+.fechas {
+    width: 8em!Important;
+    color: black;
+	background-color: #ffffff!Important;
+}
+
+.campo-corto {
+    width: 10em!Important;
+    color: black;
+	background-color: #ffffff!Important;
+}
+
+.campo-numero {
+    width: 6em!Important;
+    color: black;
+	background-color: #ffffff!Important;
+}
+
+
+.marco-negro {
+	border: 2px solid black;
+	border-radius: 5px;
+	padding: 0.5em;
+	margin: 0.5em;
+}
+
+.obj-invisible {
+	visibility: hidden;
+}
+
+#ventana-modal {
+   visibility: hidden;
+   overflow-y: scroll;
+   opacity: 1;
+   background-color: rgba(0,0,0,0.8);
+   position: fixed;
+   top:0;
+   left:0;
+   right:0;
+   bottom:0;
+   margin:0;
+   z-index: 99;
+}
+
+.ventana-modal-contenedor {
+   position: relative;
+   margin:7% auto;
+   padding:30px 50px;
+   background-color: #fafafa;
+   color:#333;
+   border-radius: 3px;
+   width:50%;
+}
+
+.ventana-modal-cerrar {
+   position: absolute;
+   top:3px;
+   right:3px;
+   background-color: #333;
+   padding:7px 10px;
+   font-size: 20px;
+   text-decoration: none;
+   line-height: 1;
+   color:#fff;
+   cursor: pointer;
+}
+
+.caja-estado, .caja-tabulador, .caja-leyenda, .cambiar-estado {
+    color: black;
+    background: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 5px;
+    box-shadow: 4px 3px 3px rgba(50, 50, 50, 0.75);
+	margin: 0px;
+	padding: 1em;
+}
+
+.caja-leyenda {
+	background: MediumAquamarine;
+}
+
+
+.fondo-gris {
+	background: LightGrey!Important;
+}
+
+.fondo-blanco {
+	background: white;
+}
+
+.fondo-cyan-oscuro {
+	background: DarkCyan!Important;
+}
+
+.fondo-khaki {
+	background: Khaki!Important;
+}
+
+.solo-lectura{
+   background-color: DarkSlateGray!important;
+   color: DarkSeaGreen!Important;
+   font-weight: bold;
+   opacity: 1!Important;
+}
+
+.resaltar_link:hover {
+    background-color: yellow!Important;
+    font-weight: bold;
+    font-style: italic;
+    .color: blue!Important;
+    color: green!Important;
+    .text-shadow: rgb(0, 0, 0) 1px 1px 0px;
+}
+
+/*
+	Este estilo pertenece a jquery-ui-1.12.1.min.css
+	Se ha cambiado a una capa superior porque las listas desplegables
+	quedaban por encima del calendario desplegrado.
+*/
+.ui-datepicker {
+	z-index: 999!Important;
+}
+/* fin jquery-ui-1.12.1.min.css */ 
+
+
+/* bootstrap-select.min.css */ 
+.bootstrap-select {
+	border: 1px solid #ced4da!Important;
+}
+.bootstrap-select.disabled, .bootstrap-select > .disabled{
+   background-color: DarkSlateGray!important;
+   color: DarkSeaGreen!Important;
+   font-weight: bold;
+   opacity: 1!Important;
+}
+/* fin bootstrap-select.min.css */ 
