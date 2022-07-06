@@ -73,8 +73,8 @@ function recuperarDatosPOST()
 {
     $CURSOR = iniciarCampos();
     //FILTROS
-    $CURSOR["f_referencia"]             = isset($_POST["f_referencia"])         ? $_POST["f_referencia"] : "";
-    $CURSOR["f_nombre"]                 = isset($_POST["f_nombre"])             ? $_POST["f_nombre"]     : "";
+    $CURSOR["f_ref"]             = isset($_POST["f_ref"])         ? $_POST["f_ref"] : "";
+    $CURSOR["f_name"]                 = isset($_POST["f_name"])             ? $_POST["f_name"]     : "";
     //COMPROBACION
     $CURSOR["id"]                       = isset($_GET["id"])                    ? $_GET["id"]               : 0;
     //CAMPOS
@@ -94,8 +94,8 @@ function recuperarDatosPOST()
 function iniciarCampos()
 {
     //FILTROS
-    $CURSOR["f_referencia"]      = "";
-    $CURSOR["f_nombre"]   = "";
+    $CURSOR["f_ref"]      = "";
+    $CURSOR["f_name"]   = "";
 
     //CAMPOS
     $CURSOR["id"]                       = "";
@@ -150,11 +150,11 @@ function mostrarListado()
                     <div class="borde-sombra">
                         <div class="caja-en-linea">
                             <p class="negrita">REFERENCIA</p>
-                            <input type="text" title="Introduzca la referencia o parte de el" id="f_referencia" name="f_referencia" placeholder="#referencia#" value="{$CURSOR["f_referencia"]}">
+                            <input type="text" title="Introduzca la referencia o parte de el" id="f_ref" name="f_ref" placeholder="#referencia#" value="{$CURSOR["f_ref"]}">
                         </div>
                         <div class="caja-en-linea">
                             <p class="negrita">NOMBRE</p>
-                            <input type="text" title="Introduzca el nombre o parte de el" id="f_nombre" name="f_nombre" placeholder="#Nombre#" value="{$CURSOR["f_nombre"]}">
+                            <input type="text" title="Introduzca el nombre o parte de el" id="f_name" name="f_name" placeholder="#Nombre#" value="{$CURSOR["f_name"]}">
                         </div>
                         
                         
@@ -562,11 +562,11 @@ function formarFiltro()
     $texto = "";
     $a_filtro = array();
     //COMPROBACION ENVIADO
-    if ($CURSOR["f_referencia"] != "") {
-        array_push($a_filtro, "ref_manufacturer LIKE '%" . $CURSOR["f_referencia"] . "%'");
+    if ($CURSOR["f_ref"] != "") {
+        array_push($a_filtro, "ref_manufacturer LIKE '%" . $CURSOR["f_ref"] . "%'");
     }
-    if ($CURSOR["f_nombre"] != "") {
-        array_push($a_filtro, "device_nom LIKE '%" . $CURSOR["f_nombre"] . "%'");
+    if ($CURSOR["f_name"] != "") {
+        array_push($a_filtro, "device_nom LIKE '%" . $CURSOR["f_name"] . "%'");
     }
 
     if (count($a_filtro) != 0) {
