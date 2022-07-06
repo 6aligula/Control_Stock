@@ -39,17 +39,17 @@ function recuperarDatosPOST()
 {
     $CURSOR = iniciarCampos();
     //FILTROS
-    $CURSOR["f_referencia"]             = isset($_POST["f_referencia"])         ? $_POST["f_referencia"] : "";
-    $CURSOR["f_nombre"]                 = isset($_POST["f_nombre"])             ? $_POST["f_nombre"]     : "";
+    $CURSOR["f_ref"]             = isset($_POST["f_referencia"])         ? $_POST["f_referencia"] : "";
+    $CURSOR["f_name"]                 = isset($_POST["f_name"])             ? $_POST["f_name"]     : "";
     //COMPROBACION
     $CURSOR["id"]                       = isset($_GET["id"])                    ? $_GET["id"]               : 0;
     //CAMPOS
-    $CURSOR["referencia_fabricante"]    = isset($_POST["referencia_fabricante"]) ? $_POST["referencia_fabricante"]   : "";
-    $CURSOR["nombre_articulo"]          = isset($_POST["nombre_articulo"])      ? $_POST["nombre_articulo"]         : "";
-    $CURSOR["id_seccion"]               = isset($_POST["id_seccion"])           ? $_POST["id_seccion"]              : "";
-    $CURSOR["id_familia"]               = isset($_POST["id_familia"])           ? $_POST["id_familia"]              : "";
-    $CURSOR["id_grupo"]               = isset($_POST["id_grupo"])           ? $_POST["id_grupo"]              : "";
-    $CURSOR["observaciones"]            = isset($_POST["observaciones"])        ? $_POST["observaciones"]           : "";
+    $CURSOR["ref_manufacturer"]    = isset($_POST["ref_manufacturer"]) ? $_POST["ref_manufacturer"]   : "";
+    $CURSOR["device_name"]          = isset($_POST["device_name"])      ? $_POST["device_name"]         : "";
+    $CURSOR["id_section"]               = isset($_POST["id_section"])           ? $_POST["id_section"]              : "";
+    $CURSOR["id_family"]               = isset($_POST["id_family"])           ? $_POST["id_family"]              : "";
+    $CURSOR["id_group"]               = isset($_POST["id_group"])           ? $_POST["id_group"]              : "";
+    $CURSOR["observations"]            = isset($_POST["observations"])        ? $_POST["observations"]           : "";
     return $CURSOR;
 }
 
@@ -62,16 +62,16 @@ function iniciarCampos()
 {
     //FILTROS
     $CURSOR["f_referencia"]      = "";
-    $CURSOR["f_nombre"]   = "";
+    $CURSOR["f_name"]   = "";
 
     //CAMPOS
     $CURSOR["id"]                       = "";
-    $CURSOR["referencia_fabricante"]    = "";
-    $CURSOR["nombre_articulo"]          = "";
-    $CURSOR["id_seccion"]               = "";
-    $CURSOR["id_familia"]               = "";
-    $CURSOR["id_grupo"]               = "";
-    $CURSOR["observaciones"]            = "";
+    $CURSOR["ref_manufacturer"]    = "";
+    $CURSOR["device_name"]          = "";
+    $CURSOR["id_section"]               = "";
+    $CURSOR["id_family"]               = "";
+    $CURSOR["id_group"]               = "";
+    $CURSOR["observations"]            = "";
     return $CURSOR;
 }
 
@@ -89,17 +89,17 @@ function mostrarListado()
         $CURSOR = recuperarDatosPOST();
 
         $pagina = "seleccion";
-        $titulo = "SELECCIÓN DE ARTICULOS";
+        $titulo = "selection of devices";
         $texto = "";
 
         if (isset($_SESSION["seleccion"])) unset($_SESSION["seleccion"]);
 
-        //SELECT DE CONJUNTO DE articulos PARA LISTAR
-        $ConsultaSQL = "SELECT * FROM articulos {$filtro} ORDER BY nombre_articulo ASC";
+        //SELECT DE CONJUNTO DE devices PARA LISTAR
+        $ConsultaSQL = "SELECT * FROM devices {$filtro} ORDER BY device_name ASC";
 
         $listado = consultaListadoSQL($ConsultaSQL);
-        $listado_articulos = "";
-        $listado_articulos = Listado_Sencillo($listado);
+        $listado_devices = "";
+        $listado_devices = Listado_Sencillo($listado);
 
 
         $texto = <<<EOF
@@ -118,7 +118,7 @@ function mostrarListado()
                         <div class="caja-en-linea">
                             <label for="cdc">Sección</label><br>
                             <td>
-                                <select id="id_seccion" name="id_seccion">
+                                <select id="id_section" name="id_section">
                                     <option value="null"></option>
                                     <option value="1" id="Familia_Automatismos" name="1">A Automatismos</option>              
                                     <option value="2" id="Familia_Fungibles" name="2">F Fungibles</option>              
@@ -128,7 +128,7 @@ function mostrarListado()
                         <div class="caja-en-linea">
                             <label for="cdc">Familia</label><br>
                             <td>
-                                <select id="id_familia" name="id_familia">
+                                <select id="id_family" name="id_family">
                                     <option value="null"></option>
                                     <optgroup label="Familia_Automatismos" id="id_automatismos">
                                         <option value="null"></option>
@@ -159,7 +159,7 @@ function mostrarListado()
                         <div class="caja-en-linea">
                             <label for="cdc">GRUPO</label><br>
                             <td>
-                                <select id="id_grupo" name="id_grupo">                                        
+                                <select id="id_group" name="id_group">                                        
                                     <optgroup label="Fuentes_de_alimentacion_transformadores_y_fusibles">
                                         <option value="null"></option>
                                         <option value="4">Fuentes de Alimentación</option>
@@ -192,7 +192,7 @@ function mostrarListado()
                         LISTADO ORDENADO POR NOMBRE, SELECCIONE UN ARTICULO PARA EDITARLO
                     </div>
                     
-                    {$listado_articulos}
+                    {$listado_devices}
                     <p class="clearfix"></p>
                 </div>
                 
@@ -224,11 +224,11 @@ function Listado_Sencillo($listado)
         $num_registros = "Registros encontrados: " . count($listado);
         foreach ($listado as $fila) {
             $id = $fila["id"];
-            $referencia = $fila["referencia_fabricante"];
-            $nombre = $fila["nombre_articulo"];
-            $id_seccion = $fila["id_seccion"];
-            $id_familia = $fila["id_familia"];
-            $observaciones = $fila["observaciones"];
+            $referencia = $fila["ref_manufacturer"];
+            $nombre = $fila["device_name"];
+            $id_section = $fila["id_section"];
+            $id_family = $fila["id_family"];
+            $observations = $fila["observations"];
 
             $lista .= <<<EOF
             
@@ -237,9 +237,9 @@ function Listado_Sencillo($listado)
                             <tr>
                                 <td class="centrado" width="300">{$referencia}</td>
                                 <td class="izquierda truncate" width="300">{$nombre}</td>
-                                <td class="izquierda truncate" width="200">{$id_seccion}</td>
-                                <td class="izquierda truncate" width="200">{$id_familia}</td>
-                                <td class="izquierda truncate" width="*">{$observaciones}</td>
+                                <td class="izquierda truncate" width="200">{$id_section}</td>
+                                <td class="izquierda truncate" width="200">{$id_family}</td>
+                                <td class="izquierda truncate" width="*">{$observations}</td>
                             </tr>
                         </table>
                     </a>
@@ -255,7 +255,7 @@ EOF;
                         <th class="izquierda" width="300">NOMBRE</th>
                         <th class="izquierda" width="200">ID SECCION</th>
                         <th class="izquierda" width="200">ID FAMILIA</th>
-                        <th class="izquierda" width="*">OBSERVACIONES</th>
+                        <th class="izquierda" width="*">observations</th>
                     </tr>
                 </table>
             </div>
@@ -272,7 +272,7 @@ function mostrarRegistro($tipoAccion)
 {
     try {
         global $menu, $pagina, $titulo, $javaScripts;
-        $pagina = "articulos";
+        $pagina = "devices";
         $CURSOR = recuperarDatosPOST();
 
         $noHayRegistro = "";
@@ -285,11 +285,11 @@ function mostrarRegistro($tipoAccion)
 
                 $titulo = "MODIFICAR";
                 $id = $_GET["id"];
-                /*                 $id_seccion = $_GET["id_seccion"];
-                $id_familia = $_GET["id_familia"]; */
+                /*                 $id_section = $_GET["id_section"];
+                $id_family = $_GET["id_family"]; */
 
                 if (empty($_POST)) {
-                    $ConsultaSQL = "SELECT * FROM articulos WHERE id = {$id}";
+                    $ConsultaSQL = "SELECT * FROM devices WHERE id = {$id}";
                     $registro = consultaRegistroSQL($ConsultaSQL);
 
                     if (empty($registro)) {
@@ -299,11 +299,11 @@ function mostrarRegistro($tipoAccion)
                     //COMPROBACION
                     $CURSOR["id"]                               = $registro["id"];
                     //CAMPOS           
-                    $CURSOR["referencia_fabricante"]            = $registro["referencia_fabricante"];
-                    $CURSOR["nombre_articulo"]                  = $registro["nombre_articulo"];
-                    $CURSOR["id_seccion"]                       = $registro["id_seccion"];
-                    $CURSOR["id_familia"]                       = $registro["id_familia"];
-                    $CURSOR["observaciones"]                    = $registro["observaciones"];
+                    $CURSOR["ref_manufacturer"]            = $registro["ref_manufacturer"];
+                    $CURSOR["device_name"]                  = $registro["device_name"];
+                    $CURSOR["id_section"]                       = $registro["id_section"];
+                    $CURSOR["id_family"]                       = $registro["id_family"];
+                    $CURSOR["observations"]                    = $registro["observations"];
                 }
 
 
@@ -355,35 +355,35 @@ EOF;
                     <center>{$botones}</center>
                     
 					<p class="clearfix">
-                        <label for="referencia_fabricante" class="negrita">REFERENCIA DEL FABRICANTE <span class="anotacion"> (*)</span></label>
+                        <label for="ref_manufacturer" class="negrita">REFERENCIA DEL FABRICANTE <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="100" required class="form-control" title="Referencia del fabricante (Máx. 100 caracteres)"  id="referencia_fabricante" name="referencia_fabricante" placeholder="#referencia del fabricante (Máx. 100 caracteres)#" value="{$CURSOR["referencia_fabricante"]}" />
+                        <input type="text" maxlength="100" required class="form-control" title="Referencia del fabricante (Máx. 100 caracteres)"  id="ref_manufacturer" name="ref_manufacturer" placeholder="#referencia del fabricante (Máx. 100 caracteres)#" value="{$CURSOR["ref_manufacturer"]}" />
                     
                     </p>
 					
 					<p class="clearfix">
-                        <label for="nombre_articulo" class="negrita">NOMBRE DEL ARTÍCULO <span class="anotacion"> (*)</span></label>
+                        <label for="device_name" class="negrita">NOMBRE DEL ARTÍCULO <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="50" required class="form-control" title="Nombre del articulo (Máx. 50 caracteres)"  id="nombre_articulo" name="nombre_articulo" placeholder="#Nombre del articulo (Máx. 50 caracteres)#" value="{$CURSOR["nombre_articulo"]}" />
-                    
-                    </p>
-                    <p class="clearfix">
-                        <label for="id_seccion" class="negrita">IDENTIFICADOR DE SECCIÓN <span class="anotacion"> (*)</span></label>
-                    
-                        <input type="text" maxlength="50" required class="form-control" title="Id de la sección (Máx. 50 caracteres)"  id="id_seccion" name="id_seccion" placeholder="#ID de la sección (Máx. 50 caracteres)#" value="{$CURSOR["id_seccion"]}" autofocus />
+                        <input type="text" maxlength="50" required class="form-control" title="Nombre del articulo (Máx. 50 caracteres)"  id="device_name" name="device_name" placeholder="#Nombre del articulo (Máx. 50 caracteres)#" value="{$CURSOR["device_name"]}" />
                     
                     </p>
                     <p class="clearfix">
-                        <label for="id_familia" class="negrita">IDENTIFICADOR DE FAMILIA <span class="anotacion"> (*)</span></label>
+                        <label for="id_section" class="negrita">IDENTIFICADOR DE SECCIÓN <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="50" required class="form-control" title="Id de la familia (Máx. 50 caracteres)"  id="id_familia" name="id_familia" placeholder="#ID de la familia (Máx. 50 caracteres)#" value="{$CURSOR["id_familia"]}" autofocus />
+                        <input type="text" maxlength="50" required class="form-control" title="Id de la sección (Máx. 50 caracteres)"  id="id_section" name="id_section" placeholder="#ID de la sección (Máx. 50 caracteres)#" value="{$CURSOR["id_section"]}" autofocus />
+                    
+                    </p>
+                    <p class="clearfix">
+                        <label for="id_family" class="negrita">IDENTIFICADOR DE FAMILIA <span class="anotacion"> (*)</span></label>
+                    
+                        <input type="text" maxlength="50" required class="form-control" title="Id de la familia (Máx. 50 caracteres)"  id="id_family" name="id_family" placeholder="#ID de la familia (Máx. 50 caracteres)#" value="{$CURSOR["id_family"]}" autofocus />
                     
                     </p>
 					
 					 <p class="clearfix">
-                        <label for="observaciones" class="negrita">OBSERVACIONES <span class="anotacion"> (*)</span></label>
+                        <label for="observations" class="negrita">observations <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="50" required class="form-control" title="Observaciones (Máx. 50 caracteres)"  id="observaciones" name="observaciones" placeholder="#Observaciones (Máx. 50 caracteres)#" value="{$CURSOR["observaciones"]}" />
+                        <input type="text" maxlength="50" required class="form-control" title="observations (Máx. 50 caracteres)"  id="observations" name="observations" placeholder="#observations (Máx. 50 caracteres)#" value="{$CURSOR["observations"]}" />
                     
                     </p>
                     
@@ -416,7 +416,7 @@ function Listado_Secciones($listado, $valor, $filaCero)
 EOF;
         foreach ($listado as $fila) {
             $id = $fila["id"];
-            $nombre = $fila["nombre_articulo"];
+            $nombre = $fila["device_name"];
             $seleccionado = ($id == $valor) ? "selected" : "";
             $lista .= <<<EOF
                     <option value="{$id}" {$seleccionado}>{$nombre}</option>
@@ -449,8 +449,8 @@ function guardarRegistro()
         // Si se ha producido algún cambio, intentamos modificar el registro
         $salir = false;
         if ($continuar) {
-            $ConsultaSQL = "SELECT nombre_articulo FROM articulos WHERE nombre_articulo = ? AND id <> ?;";
-            $datos = array($CURSOR["nombre_articulo"], $CURSOR["id"]);
+            $ConsultaSQL = "SELECT device_name FROM devices WHERE device_name = ? AND id <> ?;";
+            $datos = array($CURSOR["device_name"], $CURSOR["id"]);
             $existeRegistro = consultaRegistroExisteSQL($ConsultaSQL, $datos);
 
             if ($existeRegistro == true) {
@@ -461,21 +461,21 @@ function guardarRegistro()
 
             if ($salir == false) {
 
-                $ConsultaSQL = "UPDATE articulos SET 
-                                                        referencia_fabricante = ?,
-                                                        nombre_articulo = ?,
-														id_seccion = ?,
-														id_familia = ?,
-														observaciones = ?
+                $ConsultaSQL = "UPDATE devices SET 
+                                                        ref_manufacturer = ?,
+                                                        device_name = ?,
+														id_section = ?,
+														id_family = ?,
+														observations = ?
                                                     WHERE id = ?";
 
 
                 $datos = array(
-                    mb_strtoupper($CURSOR["referencia_fabricante"]),
-                    mb_strtoupper($CURSOR["nombre_articulo"]),
-                    mb_strtoupper($CURSOR["id_seccion"]),
-                    mb_strtoupper($CURSOR["id_familia"]),
-                    mb_strtoupper($CURSOR["observaciones"]),
+                    mb_strtoupper($CURSOR["ref_manufacturer"]),
+                    mb_strtoupper($CURSOR["device_name"]),
+                    mb_strtoupper($CURSOR["id_section"]),
+                    mb_strtoupper($CURSOR["id_family"]),
+                    mb_strtoupper($CURSOR["observations"]),
                     $CURSOR["id"]
                 );
 
@@ -515,39 +515,39 @@ function guardarRegistro()
 }
 /***********************************************************************************************************************
         añadir un articulo
-        voy contra el formulario elegido por el usuario con id_seccion, id_familia e id_grupo
+        voy contra el formulario elegido por el usuario con id_section, id_family e id_group
  ***********************************************************************************************************************/
 function afegirArticle()
 {
     try {
         $CURSOR = recuperarDatosPOST();
 
-        $id_seccion = $CURSOR["id_seccion"];
-        $id_familia = $CURSOR["id_familia"];
-        $id_grupo = $CURSOR["id_grupo"];
-        //header('location: seleccionArticulo.php?id_grupo='.$id_grupo);
-        /* echo $id_familia;
-        echo $id_grupo; */
-        $rutaFormulario = elegirFormulario($id_grupo);
+        $id_section = $CURSOR["id_section"];
+        $id_family = $CURSOR["id_family"];
+        $id_group = $CURSOR["id_group"];
+        //header('location: seleccionArticulo.php?id_group='.$id_group);
+        /* echo $id_family;
+        echo $id_group; */
+        $rutaFormulario = elegirFormulario($id_group);
         //header('location: seleccionArticulo.php?'.$rutaFormulario);
-        header("location: " . $rutaFormulario . $id_seccion . "&id_familia=" . $id_familia . "&id_grupo=" . $id_grupo);
+        header("location: " . $rutaFormulario . $id_section . "&id_family=" . $id_family . "&id_group=" . $id_group);
     } catch (Exception $e) {
-        return "Error al enviar id_seccion, id_familia o id_grupo " . $e->getMessage();
+        return "Error al enviar id_section, id_family o id_group " . $e->getMessage();
     }
 }
 
-function elegirFormulario($id_grupo)
+function elegirFormulario($id_group)
 {
     $texto = "";
-    switch ($id_grupo) {
+    switch ($id_group) {
         case "1":
-            $texto = "unipolar.php?id_seccion=";
+            $texto = "unipolar.php?id_section=";
             break;
         case "2":
-            $texto = "manguera.php?id_seccion=";
+            $texto = "manguera.php?id_section=";
             break;
         case "3":
-            $texto = "confeccionado.php?id_seccion=";
+            $texto = "confeccionado.php?id_section=";
             break;
         case "4":
             break;
@@ -569,10 +569,10 @@ function formarFiltro()
     $a_filtro = array();
     //COMPROBACION ENVIADO
     if ($CURSOR["f_referencia"] != "") {
-        array_push($a_filtro, "referencia_fabricante LIKE '%" . $CURSOR["f_referencia"] . "%'");
+        array_push($a_filtro, "ref_manufacturer LIKE '%" . $CURSOR["f_referencia"] . "%'");
     }
-    if ($CURSOR["f_nombre"] != "") {
-        array_push($a_filtro, "nombre_articulo LIKE '%" . $CURSOR["f_nombre"] . "%'");
+    if ($CURSOR["f_name"] != "") {
+        array_push($a_filtro, "device_name LIKE '%" . $CURSOR["f_name"] . "%'");
     }
 
     if (count($a_filtro) != 0) {
@@ -607,7 +607,7 @@ function menuOpciones()
             $texto = addRegistro();
             break;
         case "ATRAS":
-            header("location: articulos.php");
+            header("location: devices.php");
             break;
         case "MENU PRINCIPAL":
             header("location: index.php");

@@ -6,16 +6,16 @@ $tamano = $_FILES['image']['size'];
 $temp = $_FILES['image']['tmp_name'];
 $directorioLocal = 'img/';
 //recibo los datos para el nombre de la imagen
-$id_seccion = $_POST['id_seccion'];
-$id_familia = $_POST['id_familia'];
-$id_grupo = $_POST['id_grupo'];
-$codigo = $_POST['codigo'];
+$id_section = $_POST['id_section'];
+$id_familiy = $_POST['id_familiy'];
+$id_group = $_POST['id_group'];
+$code = $_POST['code'];
 
 //renombrar imagen
 $extension = pathinfo($directorioLocal . $nombre_img, PATHINFO_EXTENSION);
 //$base = pathinfo($temp . $nombre_img, PATHINFO_BASENAME);
 //echo $base;
-$nuevo_nombre_img = trim($id_seccion) . trim($id_familia) . trim($id_grupo) . trim($codigo) . "." . $extension;
+$nuevo_nombre_img = trim($id_section) . trim($id_familiy) . trim($id_group) . trim($code) . "." . $extension;
 
 //Si existe imagen y tiene un tamaño correcto
 if (!empty($nombre_img) && ($_FILES['image']['size'] <= 200000000)) {
@@ -36,8 +36,6 @@ if (!empty($nombre_img) && ($_FILES['image']['size'] <= 200000000)) {
    //si existe la variable pero se pasa del tamaño permitido
    if ($nombre_img == !NULL) echo "La imagen es demasiado grande ";
 }
-//https://es.stackoverflow.com/questions/171361/subir-imagen-jquery-ajax-y-otros-datos-en-el-mismo-formulario
-//https://es.stackoverflow.com/questions/171361/subir-imagen-jquery-ajax-y-otros-datos-en-el-mismo-formulario
 
 // Funcion principal para la gestion del tipo a imagen a redimensionar
 function redimensionaFinal($directorioLocal, $nuevo_nombre_img, $extension)
@@ -135,6 +133,3 @@ function creaImagen($lienzo, $directorioLocal, $nuevo_nombre_img, $cal, $extensi
          $texto = "NO HAY NINGUNA OPCIÓN SELECCIONADA.";
    }
 }
-
-//https://poesiabinaria.net/2016/06/redimensionando-fotos-en-php-evitando-que-se-deformen-nuestras-imagenes/
-//https://donnierock.com/2013/02/01/redimensionar-imagenes-en-php/

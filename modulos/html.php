@@ -18,9 +18,9 @@
             } else {
                 $ruta = "";
             }
-            $version_title = "STOCK ALMACEN - v. 2022.04";
-            $version_app = "SySTec S.L. v. 22.04";
-            $nom= "STOCK ALMACEN";
+            $version_title = "WAREHOUSE STOCK - v. 2022.04";
+            $version_app = "ENTERPRISE NAME S.L. v. 22.04";
+            $nom= "WAREHOUSE STOCK";
             
             $dia_sistema = date("d-m-Y");
             $hora_sistema = date("H:i:s");

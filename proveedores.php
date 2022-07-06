@@ -70,17 +70,17 @@ function validarCampos() {
 function recuperarDatosPOST() {
         $CURSOR = iniciarCampos();
         //FILTROS
-        $CURSOR["f_nombre"]      = isset($_POST["f_nombre"])        ? $_POST["f_nombre"]        : "";
-        $CURSOR["f_direccion"]   = isset($_POST["f_direccion"])     ? $_POST["f_direccion"]     : "";
+        $CURSOR["f_name_supplier"]      = isset($_POST["f_name_supplier"])        ? $_POST["f_name_supplier"]        : "";
+        $CURSOR["f_direction"]   = isset($_POST["f_direction"])     ? $_POST["f_direction"]     : "";
         //COMPROBACION
         $CURSOR["id"]            = isset($_GET["id"])               ? $_GET["id"]               : 0;
         //CAMPOS
-        $CURSOR["nombre"]        = isset($_POST["nombre"])          ? $_POST["nombre"]          : "";
-        $CURSOR["direccion"]     = isset($_POST["direccion"])       ? $_POST["direccion"]       : "";
-        $CURSOR["contacto"]      = isset($_POST["contacto"])        ? $_POST["contacto"]        : "";
-        $CURSOR["telefonos"]     = isset($_POST["telefonos"])       ? $_POST["telefonos"]       : "";
-        $CURSOR["observaciones"] = isset($_POST["observaciones"])	? $_POST["observaciones"]	: "";
-        $CURSOR["disponible"]    = isset($_POST["disponible"])      ? $_POST["disponible"]      : 0;
+        $CURSOR["name_supplier"]        = isset($_POST["name_supplier"])          ? $_POST["name_supplier"]          : "";
+        $CURSOR["direction"]     = isset($_POST["direction"])       ? $_POST["direction"]       : "";
+        $CURSOR["contact"]      = isset($_POST["contact"])        ? $_POST["contact"]        : "";
+        $CURSOR["phone"]     = isset($_POST["phone"])       ? $_POST["phone"]       : "";
+        $CURSOR["observations"] = isset($_POST["observations"])	? $_POST["observations"]	: "";
+        $CURSOR["available"]    = isset($_POST["available"])      ? $_POST["available"]      : 0;
         
         return $CURSOR;
 }
@@ -92,16 +92,16 @@ function recuperarDatosPOST() {
 ***********************************************************************************************************************/    
 function iniciarCampos() {
         //FILTROS
-        $CURSOR["f_nombre"]      = "";
-        $CURSOR["f_direccion"]   = "";
+        $CURSOR["f_name_supplier"]      = "";
+        $CURSOR["f_direction"]   = "";
         
         //CAMPOS
         $CURSOR["id"]            = "";
-        $CURSOR["direccion"]     = "";
-        $CURSOR["contacto"]      = "";
-        $CURSOR["telefonos"]     = "";
-        $CURSOR["observaciones"] = "";
-        $CURSOR["disponible"]    = 0;
+        $CURSOR["direction"]     = "";
+        $CURSOR["contact"]      = "";
+        $CURSOR["phone"]     = "";
+        $CURSOR["observations"] = "";
+        $CURSOR["available"]    = 0;
 
         return $CURSOR;
 }
@@ -125,7 +125,7 @@ function iniciarCampos() {
             if(isset($_SESSION["proveedores"])) unset($_SESSION["proveedores"]);
             
             //SELECT DE CONJUNTO DE proveedores PARA LISTAR
-            $ConsultaSQL = "SELECT * FROM proveedores {$filtro} ORDER BY nombre ASC";
+            $ConsultaSQL = "SELECT * FROM proveedores {$filtro} ORDER BY name_supplier ASC";
                                 
             $listado = consultaListadoSQL($ConsultaSQL);
             $listado_proveedores = "";
@@ -147,12 +147,12 @@ function iniciarCampos() {
                     <h4 class="texto-destacado">FILTROS</h4>
                     <div class="borde-sombra">
                         <div class="caja-en-linea">
-                            <p class="negrita">NOMBRE</p>
-                            <input type="text" title="Introduzca el nombre o parte de el" id="f_nombre" name="f_nombre" placeholder="#Nombre#" value="{$CURSOR["f_nombre"]}">
+                            <p class="negrita">name_supplier</p>
+                            <input type="text" title="Introduzca el name_supplier o parte de el" id="f_name_supplier" name="f_name_supplier" placeholder="#name_supplier#" value="{$CURSOR["f_name_supplier"]}">
                         </div>
                         <div class="caja-en-linea">
-                            <p class="negrita">DIRECCION</p>
-                            <input type="text" title="Introduzca la direccion o parte de ella" id="f_direccion" name="f_direccion" placeholder="#Direccion#" value="{$CURSOR["f_direccion"]}">
+                            <p class="negrita">direction</p>
+                            <input type="text" title="Introduzca la direction o parte de ella" id="f_direction" name="f_direction" placeholder="#direction#" value="{$CURSOR["f_direction"]}">
                         </div>
                         
                         
@@ -165,7 +165,7 @@ function iniciarCampos() {
                 <!-- -------------------------------------FIN FILTROS------------------------------------- -->
                 
                     <div class="centrado negrita">
-                        LISTADO ORDENADO POR NOMBRE DE PROVEEDOR, SELECCIONE UN PROVEEDOR PARA EDITARLO
+                        LISTADO ORDENADO POR name_supplier DE PROVEEDOR, SELECCIONE UN PROVEEDOR PARA EDITARLO
                     </div>
                     
                     {$listado_proveedores}
@@ -199,14 +199,14 @@ EOF;
             $num_registros="Registros encontrados: ".count($listado);
             foreach($listado as $fila){
                 $id = $fila["id"];
-                $nombre = $fila["nombre"];
-                $direccion = str_replace(PHP_EOL, '<br>', $fila["direccion"]);
-				$contacto = $fila["contacto"];
-				$telefonos = $fila["telefonos"];
-                $disponible = $fila["disponible"];
+                $name_supplier = $fila["name_supplier"];
+                $direction = str_replace(PHP_EOL, '<br>', $fila["direction"]);
+				$contact = $fila["contact"];
+				$phone = $fila["phone"];
+                $available = $fila["available"];
                 
 				$activado = "";
-                if($disponible == 1) {
+                if($available == 1) {
                     $activado = "<img src='img/activado.png' height='36px'>";
                 }else{
                     $activado = "<img src='img/cancelado.png' height='36px'>";
@@ -217,10 +217,10 @@ EOF;
                         <table class="ancho-total" >
                             <tr>
                                 <td class="centrado" width="400">{$activado}</td>
-                                <td class="izquierda truncate" width="300" title="{$nombre}">{$nombre}</td>
-                                <td class="izquierda truncate" width="400">{$contacto}</td>
-                                <td class="izquierda truncate" width="400">{$telefonos}</td>
-                                <td class="izquierda truncate" width="*">{$direccion}</td>
+                                <td class="izquierda truncate" width="300" title="{$name_supplier}">{$name_supplier}</td>
+                                <td class="izquierda truncate" width="400">{$contact}</td>
+                                <td class="izquierda truncate" width="400">{$phone}</td>
+                                <td class="izquierda truncate" width="*">{$direction}</td>
 
                             </tr>
                         </table>
@@ -233,11 +233,11 @@ EOF;
             <div class="list-group-item fondo-cyan-oscuro">
                 <table class="ancho-total">
                     <tr class="">
-                        <th class="centrado" width="400">DISPONIBLE</th>
-                        <th class="izquierda" width="300">NOMBRE</th>
-                        <th class="izquierda" width="400">CONTACTO</th>
-                        <th class="izquierda" width="400">TELEFONOS</th>
-                        <th class="izquierda" width="*">DIRECCION</th>
+                        <th class="centrado" width="400">available</th>
+                        <th class="izquierda" width="300">name_supplier</th>
+                        <th class="izquierda" width="400">CONTACT</th>
+                        <th class="izquierda" width="400">phone</th>
+                        <th class="izquierda" width="*">direction</th>
 
                     </tr>
                 </table>
@@ -273,27 +273,27 @@ EOF;
                         $registro = consultaRegistroSQL($ConsultaSQL);
                         
                         if(empty($registro)) {
-                            $noHayRegistro = "TAREA NO DISPONIBLE";
+                            $noHayRegistro = "TAREA NO available";
                         }
                         
                         //COMPROBACION
                         $CURSOR["id"]                 = $registro["id"];  
                         //CAMPOS
-                        $CURSOR["nombre"]             = $registro["nombre"];
-                        $CURSOR["direccion"]          = $registro["direccion"];
-                        $CURSOR["contacto"]           = $registro["contacto"];
-                        $CURSOR["telefonos"]          = $registro["telefonos"];
-                        $CURSOR["observaciones"]      = $registro["observaciones"];
-                        $CURSOR["disponible"]         = $registro["disponible"];
+                        $CURSOR["name_supplier"]             = $registro["name_supplier"];
+                        $CURSOR["direction"]          = $registro["direction"];
+                        $CURSOR["contact"]           = $registro["contact"];
+                        $CURSOR["phone"]          = $registro["phone"];
+                        $CURSOR["observations"]      = $registro["observations"];
+                        $CURSOR["available"]         = $registro["available"];
                     }
                     
-                    // INICIAMOS EL BOTON DISPONIBLE
-                    if($CURSOR["disponible"] == 1) {
-                        $chk_disponible = "checked";
-                        $imagen_disponible = '<img id="imagen_disponible" src="img/on.png" onClick="btn_Disponible();" />';
+                    // INICIAMOS EL BOTON available
+                    if($CURSOR["available"] == 1) {
+                        $chk_available = "checked";
+                        $imagen_available = '<img id="imagen_available" src="img/on.png" onClick="btn_available();" />';
                     } else {
-                        $chk_disponible = "";
-                        $imagen_disponible = '<img id="imagen_disponible" src="img/off.png" onClick="btn_Disponible();" />';
+                        $chk_available = "";
+                        $imagen_available = '<img id="imagen_available" src="img/off.png" onClick="btn_available();" />';
                     }
                     
                     
@@ -306,8 +306,8 @@ EOF;
                         $datos_complementarios = <<<EOF
                         
                         <div class="centrado negrita">
-                            DISPONIBLE<br>
-                            <input type="checkbox" id="disponible" name="disponible" hidden {$chk_disponible} value="1"/> {$imagen_disponible}
+                            available<br>
+                            <input type="checkbox" id="available" name="available" hidden {$chk_available} value="1"/> {$imagen_available}
                         
                         </div>              
 EOF;
@@ -326,11 +326,11 @@ EOF;
                     $titulo = "AÑADIR";
                     $id = 0;
                     
-                    // INICIAMOS EL BOTON DISPONIBLE
-                    //$chk_disponible = "";
-                    //$imagen_disponible = '<img id="imagen_disponible" src="img/off.png" onClick="btn_Disponible();" />';
-                    $chk_disponible = "checked";
-                    $imagen_disponible = '<img id="imagen_disponible" src="img/on.png" onClick="btn_Disponible();" />';
+                    // INICIAMOS EL BOTON available
+                    //$chk_available = "";
+                    //$imagen_available = '<img id="imagen_available" src="img/off.png" onClick="btn_available();" />';
+                    $chk_available = "checked";
+                    $imagen_available = '<img id="imagen_available" src="img/on.png" onClick="btn_available();" />';
                         
                     $botones = <<<EOF
                         
@@ -340,8 +340,8 @@ EOF;
                         $datos_complementarios = <<<EOF
                         
                         <div class="centrado negrita">
-                            DISPONIBLE<br>
-                            <input type="checkbox" id="disponible" name="disponible" hidden {$chk_disponible} value="1"/> {$imagen_disponible}
+                            available<br>
+                            <input type="checkbox" id="available" name="available" hidden {$chk_available} value="1"/> {$imagen_available}
                         </div>                  
 EOF;
                     break;
@@ -365,30 +365,30 @@ EOF;
                     {$registro_modificado}
                     <center>{$botones}</center>
                     <p class="clearfix">
-                        <label for="nombre" class="negrita">NOMBRE DEL PROVEDOR <span class="anotacion"> (*)</span></label>
+                        <label for="name_supplier" class="negrita">name_supplier DEL PROVEDOR <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="50" required class="form-control" title="Nombre del proveedor (Máx. 50 caracteres)"  id="nombre" name="nombre" placeholder="#Nombre del proveedor (Máx. 50 caracteres)#" value="{$CURSOR["nombre"]}" autofocus />
+                        <input type="text" maxlength="50" required class="form-control" title="name_supplier del proveedor (Máx. 50 caracteres)"  id="name_supplier" name="name_supplier" placeholder="#name_supplier del proveedor (Máx. 50 caracteres)#" value="{$CURSOR["name_supplier"]}" autofocus />
                     
                     </p>
                     
 					<p class="clearfix">
-                        <label for="direccion" class="negrita">DIRECCION DEL PROVEDOR <span class="anotacion"> (*)</span></label>
+                        <label for="direction" class="negrita">direction DEL PROVEDOR <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="100" required class="form-control" title="Direccion del proveedor (Máx. 100 caracteres)"  id="direccion" name="direccion" placeholder="#Direccion del proveedor (Máx. 100 caracteres)#" value="{$CURSOR["direccion"]}" />
+                        <input type="text" maxlength="100" required class="form-control" title="direction del proveedor (Máx. 100 caracteres)"  id="direction" name="direction" placeholder="#direction del proveedor (Máx. 100 caracteres)#" value="{$CURSOR["direction"]}" />
                     
                     </p>
 					
 					<p class="clearfix">
-                        <label for="contacto" class="negrita">PERSONA DE CONTACTO <span class="anotacion"> (*)</span></label>
+                        <label for="contact" class="negrita">PERSONA DE CONTACT <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="50" required class="form-control" title="Persona de contacto (Máx. 50 caracteres)"  id="contacto" name="contacto" placeholder="#Persona de contacto (Máx. 50 caracteres)#" value="{$CURSOR["contacto"]}" />
+                        <input type="text" maxlength="50" required class="form-control" title="Persona de contact (Máx. 50 caracteres)"  id="contact" name="contact" placeholder="#Persona de contact (Máx. 50 caracteres)#" value="{$CURSOR["contact"]}" />
                     
                     </p>
 					
 					 <p class="clearfix">
-                        <label for="telefonos" class="negrita">TELEFONOS <span class="anotacion"> (*)</span></label>
+                        <label for="phone" class="negrita">phone <span class="anotacion"> (*)</span></label>
                     
-                        <input type="text" maxlength="50" required class="form-control" title="Telefonos (Máx. 50 caracteres)"  id="telefonos" name="telefonos" placeholder="#Telefonos de contacto (Máx. 50 caracteres)#" value="{$CURSOR["telefonos"]}" />
+                        <input type="text" maxlength="50" required class="form-control" title="phone (Máx. 50 caracteres)"  id="phone" name="phone" placeholder="#phone de contact (Máx. 50 caracteres)#" value="{$CURSOR["phone"]}" />
                     
                     </p>
                     
@@ -420,10 +420,10 @@ EOF;
 EOF;
             foreach($listado as $fila){
                 $id = $fila["id"];
-                $nombre = $fila["nombre"];
+                $name_supplier = $fila["name_supplier"];
                 $seleccionado = ($id == $valor) ? "selected" : "";
                 $lista .= <<<EOF
-                    <option value="{$id}" {$seleccionado}>{$nombre}</option>
+                    <option value="{$id}" {$seleccionado}>{$name_supplier}</option>
 EOF;
             }
         } else {
@@ -452,8 +452,8 @@ EOF;
             // Si se ha producido algún cambio, intentamos modificar el registro
             $salir = false;
             if($continuar) {
-                $ConsultaSQL = "SELECT nombre FROM proveedores WHERE nombre = ? AND id <> ?;";
-                $datos = array( $CURSOR["nombre"], $CURSOR["id"] );
+                $ConsultaSQL = "SELECT name_supplier FROM proveedores WHERE name_supplier = ? AND id <> ?;";
+                $datos = array( $CURSOR["name_supplier"], $CURSOR["id"] );
                 $existeRegistro = consultaRegistroExisteSQL($ConsultaSQL, $datos);
                 
                 if($existeRegistro == true) {
@@ -465,21 +465,21 @@ EOF;
                 if($salir == false) {
                             
                     $ConsultaSQL = "UPDATE proveedores SET 
-                                                        nombre = ?,
-                                                        direccion = ?,
-														contacto = ?,
-														telefonos = ?,
-														observaciones = ?,
-														disponible = ?
+                                                        name_supplier = ?,
+                                                        direction = ?,
+														contact = ?,
+														phone = ?,
+														observations = ?,
+														available = ?
                                                     WHERE id = ?";
 
                     
-                    $datos = array( mb_strtoupper($CURSOR["nombre"]),
-                                    mb_strtoupper($CURSOR["direccion"]), 
-									mb_strtoupper($CURSOR["contacto"]), 
-									mb_strtoupper($CURSOR["telefonos"]), 
-									mb_strtoupper($CURSOR["observaciones"]), 
-                                    $CURSOR["disponible"],
+                    $datos = array( mb_strtoupper($CURSOR["name_supplier"]),
+                                    mb_strtoupper($CURSOR["direction"]), 
+									mb_strtoupper($CURSOR["contact"]), 
+									mb_strtoupper($CURSOR["phone"]), 
+									mb_strtoupper($CURSOR["observations"]), 
+                                    $CURSOR["available"],
                                     $CURSOR["id"]);
                     
                     $resultado = sentenciaSQL($ConsultaSQL, $datos);
@@ -529,24 +529,24 @@ EOF;
             
             $texto  = "";
 
-            if($CURSOR["nombre"] != "" || $CURSOR["descripcion"] != "") {
+            if($CURSOR["name_supplier"] != "" || $CURSOR["descripcion"] != "") {
                 
                 $ConsultaSQL = "INSERT INTO proveedores (id, 
-                                                    nombre, 
-                                                    direccion, 
-                                                    contacto, 
-                                                    telefonos, 
-                                                    observaciones, 
-                                                    disponible) 
+                                                    name_supplier, 
+                                                    direction, 
+                                                    contact, 
+                                                    phone, 
+                                                    observations, 
+                                                    available) 
                                                 VALUES(?,?,?,?,?,?,?)";
                 
                 $datos = array( $CURSOR[0],
-                                mb_strtoupper($CURSOR["nombre"]),
-                                mb_strtoupper($CURSOR["direccion"]),
-                                mb_strtoupper($CURSOR["contacto"]),
-                                $CURSOR["telefonos"],
-                                mb_strtoupper($CURSOR["observaciones"]),
-                                $CURSOR["disponible"]);
+                                mb_strtoupper($CURSOR["name_supplier"]),
+                                mb_strtoupper($CURSOR["direction"]),
+                                mb_strtoupper($CURSOR["contact"]),
+                                $CURSOR["phone"],
+                                mb_strtoupper($CURSOR["observations"]),
+                                $CURSOR["available"]);
                 
                 $resultado = sentenciaSQL($ConsultaSQL, $datos);
                 
@@ -564,12 +564,12 @@ EOF;
                     }else{
                         $texto = $resultado."<br>";
                         $texto .= mostrarRegistro("NUEVO");
-                        $texto .= "<p class='alerta'>No ha sido posible añadir el registro. <br/>Compruebe que la referencia o el nombre del conjunto de proveedores no esté repetido.<p>";
+                        $texto .= "<p class='alerta'>No ha sido posible añadir el registro. <br/>Compruebe que la referencia o el name_supplier del conjunto de proveedores no esté repetido.<p>";
                     }
                 }               
             } else {
                 $texto = mostrarRegistro("NUEVO");
-                $texto .= "<p class='alerta'>Es necesario, por lo menos, una referencia y un nombre de conjunto de proveedores.<p>";
+                $texto .= "<p class='alerta'>Es necesario, por lo menos, una referencia y un name_supplier de conjunto de proveedores.<p>";
             }
             return $texto;
         }catch(Exception $e){
@@ -587,11 +587,11 @@ EOF;
         $texto = "";
         $a_filtro= array();
         //COMPROBACION ENVIADO
-        if ($CURSOR["f_nombre"] != "" ){
-            array_push($a_filtro, "nombre LIKE '%".$CURSOR["f_nombre"]."%'");
+        if ($CURSOR["f_name_supplier"] != "" ){
+            array_push($a_filtro, "name_supplier LIKE '%".$CURSOR["f_name_supplier"]."%'");
         }
-        if ($CURSOR["f_direccion"] != "" ){
-            array_push($a_filtro, "direccion LIKE '%".$CURSOR["f_direccion"]."%'");
+        if ($CURSOR["f_direction"] != "" ){
+            array_push($a_filtro, "direction LIKE '%".$CURSOR["f_direction"]."%'");
         }
   
         if(count($a_filtro) != 0) {

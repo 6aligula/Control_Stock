@@ -3,9 +3,9 @@
     //define("DB_HOST"            , "127.0.0.1");
     define("DB_HOST"            , "localhost");
     define("DB_PORT"	        , "3306");
-    define("DB_USER"	        , "root");
-    define("DB_PASSWORD"        , "");
-    define("DB_DB"		        , "pruebas_php");
+    define("DB_USER"	        , "user");
+    define("DB_PASSWORD"        , "password");
+    define("DB_DB"		        , "nameDB");
     
 
     // String connection para base de datos MySQL

@@ -37,9 +37,9 @@ mostrarHTML();
 function recibeDatosGet()
 {
     //FILTROS
-    $CURSOR["id_familia"]             = isset($_GET["id_familia"])         ? $_GET["id_familia"] : "";
-    $CURSOR["id_seccion"]                 = isset($_GET["id_seccion"])             ? $_GET["id_seccion"]     : "";
-    $CURSOR["id_grupo"]                 = isset($_GET["id_grupo"])             ? $_GET["id_grupo"]     : "";
+    $CURSOR["id_family"]             = isset($_GET["id_family"])         ? $_GET["id_family"] : "";
+    $CURSOR["id_section"]                 = isset($_GET["id_section"])             ? $_GET["id_section"]     : "";
+    $CURSOR["id_group"]                 = isset($_GET["id_group"])             ? $_GET["id_group"]     : "";
     return $CURSOR;
 }
 
@@ -58,11 +58,11 @@ function mostrarFormulario()
         $titulo = "FORMULARIO CABLE UNIPOLAR";
         $texto = "";
         $CURSOR = recibeDatosGet();
-        $id_familia = $CURSOR['id_familia'];
-        $id_seccion = $CURSOR['id_seccion'];
-        $id_grupo = $CURSOR['id_grupo'];
-        //SELECT DEL MAXIMO CODIGO SEGUN LA COMBINACION DE id_seccion, id_familia y id_grupo
-        $ConsultaSQL = "SELECT MAX(codigo) as numero FROM articulos WHERE id_seccion=" . $id_seccion . " AND id_familia=" . $id_familia . " AND id_grupo=" . $id_grupo;
+        $id_family = $CURSOR['id_family'];
+        $id_section = $CURSOR['id_section'];
+        $id_group = $CURSOR['id_group'];
+        //SELECT DEL MAXIMO CODIGO SEGUN LA COMBINACION DE id_section, id_family y id_group
+        $ConsultaSQL = "SELECT MAX(codigo) as numero FROM devices WHERE id_section=" . $id_section . " AND id_family=" . $id_family . " AND id_group=" . $id_group;
         echo $ConsultaSQL;
         $codigo = consultaRegistroSQL($ConsultaSQL);
         $codigo['numero']++;
@@ -104,15 +104,15 @@ function mostrarFormulario()
                 <div>
                     <div class="caja-en-linea">
                         <label>Sección: </label>  
-                        <p id="id_seccion"> $id_seccion </p>
+                        <p id="id_section"> $id_section </p>
                     </div>
                     <div class="caja-en-linea">
                         <label>Familia:</label>
-                        <p id="id_familia"> $id_familia </p>
+                        <p id="id_family"> $id_family </p>
                     </div>
                     <div class="caja-en-linea">
                         <label>Grupo:</label>
-                        <p id="id_grupo"> $id_grupo </p>
+                        <p id="id_group"> $id_group </p>
                     </div> 
                     <div class="caja-en-linea">
                         <label>Codigo de Producto:</label>
